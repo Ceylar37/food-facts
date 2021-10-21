@@ -1,23 +1,16 @@
 import React from 'react';
-import {Layout, Menu, Spin} from "antd";
+import {Layout, Menu} from "antd";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {SelectInfo} from "rc-menu/lib/interface";
-import {useAppDispatch} from "../../hooks/useAppDispatch";
-import {showNewCategory} from "../../store/reducers/foodFactsReducer/foodFactsThunk";
+import {NavLink} from "react-router-dom";
+import {MySpin} from "../Common/MySpin/MySpin";
 
 
 const {Sider} = Layout;
 
 export const CategoriesMenu = () => {
 
-    const categories = useTypedSelector(state => state.foodFactsReducer.categories)
-    const isCategoriesLoading = useTypedSelector(state => state.foodFactsReducer.isCategoriesLoading)
-    const dispatch = useAppDispatch()
-
-    const onSelectHandler = (e: SelectInfo) => {
-        dispatch(showNewCategory(e.key))
-    }
-
+    const categories = useTypedSelector(state => state.productFactsReducer.categories)
+    const isCategoriesLoading = useTypedSelector(state => state.productFactsReducer.isCategoriesLoading)
     return (
         <Sider
             style={{
@@ -31,13 +24,14 @@ export const CategoriesMenu = () => {
         >
             <div className="logo"/>
             {isCategoriesLoading
-                ? <div style={{display: 'flex', justifyContent: 'center', alignItems: "center", height: '100%'}}>
-                    <Spin size='large'/>
-                </div>
-                : <Menu style={{height: '100%'}} theme="dark" mode="inline" onSelect={onSelectHandler}>
+                ?
+                <MySpin/>
+                : <Menu style={{height: '100%'}} theme="dark" mode="inline">
                     {categories.map(category =>
-                        <Menu.Item key={category.url}>
-                            {category.name}
+                        <Menu.Item key={category.id}>
+                            <NavLink to={'/' + category.id}>
+                                {category.name}
+                            </NavLink>
                         </Menu.Item>)
                     }
                 </Menu>}

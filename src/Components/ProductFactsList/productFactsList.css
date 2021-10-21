@@ -3,7 +3,7 @@
     width: 1250px;
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 1450px) {
     .content {
         width: 1000px;
     }

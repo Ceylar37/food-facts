@@ -1,9 +1,9 @@
 import {configureStore} from "@reduxjs/toolkit";
-import {foodFactsReducer} from "./reducers/foodFactsReducer/foodFactsSlice";
+import {productFactsReducer} from "./reducers/productFactsReducer/productFactsSlice";
 
 export const store = configureStore({
     reducer: {
-        foodFactsReducer
+        productFactsReducer
     }
 })
 
